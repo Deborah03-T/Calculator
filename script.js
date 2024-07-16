@@ -54,6 +54,16 @@ class Calculator {
     updateDisplay() {
         this.screenElement.value = this.currentValue;
     }
+
+    toggleSign(){
+        if(this.currentValue==='0')return;
+        this.currentValue=(parseFloat(this.currentValue)*-1).toString();
+    }
+
+    computePercentage(){
+        if(this.currentValue==='0')return;
+        this.currentValue=(parseFloat(this.currentValue)/100).toString();
+    }
 }
 
 const screenElement = document.querySelector('.calculator-screen');
@@ -77,8 +87,14 @@ document.querySelector('.calculator-keys').addEventListener('click', (event) => 
         case 'all-clear':
             calculator.reset();
             break;
+        case 'plus-minus':
+            calculator.toggleSign();
+            break;
+        case '%':
+            calculator.computePercentage();
         default:
             calculator.appendNumber(value);
     }
     calculator.updateDisplay();
 });
+
